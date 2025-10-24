@@ -17,14 +17,12 @@
         </a>
       </div>
       <div class="navbar-nav ms-auto d-flex align-items-center">
-        <form class="d-flex me-3" role="search">
-          <div class="input-group">
-            <input class="form-control border-end-0 rounded-start-pill ps-3" type="search" placeholder="Search destinations..." aria-label="Search" style="border-color: #dee2e6; background-color: #f8f9fa;">
-            <button class="btn btn-outline-success border-start-0 rounded-end-pill px-4" type="submit" style="border-color: #dee2e6;">
-              <i class="fa-solid fa-search"></i>
-            </button>
-          </div>
-        </form>
+        <div class="search-container me-3">
+          <input class="form-control search-input border-0 rounded-pill ps-3" type="search" placeholder="Search destinations..." aria-label="Search" style="border-color: #dee2e6; background-color: #f8f9fa; display: none;">
+          <button class="btn search-toggle border-0 rounded-pill px-3" type="button" style="color: #fe424d;">
+            <i class="fa-solid fa-search"></i>
+          </button>
+        </div>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle fw-semibold px-3 py-2 rounded-pill" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #222222; transition: all 0.3s ease;">
             <i class="fa-solid fa-user me-1"></i>
