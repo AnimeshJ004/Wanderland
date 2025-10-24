@@ -83,9 +83,14 @@ main().then(() => {
     //     res.send(registeruser);
     // })
 
+    const { HomeList } = require("./controllers/listing.js");
+
     app.use("/listings", listingRoutes); // all routes in listingRoutes will be prefixed with "/"
     app.use("/listings/:id/reviews", reviewRoutes); // all routes in reviewRoutes will be prefixed with "/"
     app.use("/", userRoutes); // all routes in userRoutes will be prefixed with "/"
+
+    // Add route for /home to render Home page
+    app.get("/home", HomeList);
 
 
     //All get responses

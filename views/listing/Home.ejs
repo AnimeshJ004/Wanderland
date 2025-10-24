@@ -1,0 +1,60 @@
+<%- layout("/layouts/boilerplate") %>
+<div class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to WanderLust</h1>
+    <p class="hero-subtitle">Discover amazing destinations and create unforgettable memories</p>
+    <div class="hero-buttons">
+      <a href="/listings" class="btn btn-primary btn-lg hero-btn">Explore Listings</a>
+      <a href="/signup" class="btn btn-outline-light btn-lg hero-btn">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+<section class="features-section">
+  <div class="container">
+    <h2 class="section-title">Why Choose WanderLust?</h2>
+    <div class="row">
+      <div class="col-md-4 feature-item">
+        <i class="fas fa-map-marked-alt feature-icon"></i>
+        <h3>Explore Destinations</h3>
+        <p>Discover hidden gems and popular spots around the world.</p>
+      </div>
+      <div class="col-md-4 feature-item">
+        <i class="fas fa-users feature-icon"></i>
+        <h3>Connect with Travelers</h3>
+        <p>Share experiences and connect with fellow adventurers.</p>
+      </div>
+      <div class="col-md-4 feature-item">
+        <i class="fas fa-star feature-icon"></i>
+        <h3>Rate & Review</h3>
+        <p>Read authentic reviews and share your own adventures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="listings-preview-section">
+  <div class="container">
+    <h2 class="section-title">Featured Listings</h2>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+      <% for (let i = 0; i < Math.min(listings.length, 6); i++) { %>
+        <% let listing = listings[i]; %>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+          <div class="card col listing-card">
+            <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>" style="height: 15rem; object-fit: cover; object-position: center;">
+            <div class="card-img-overlay"></div>
+            <div class="card-body">
+              <b><h6 class="card-title"><%= listing.title %></h6></b>
+              <p class="card-text"> &#8377; <%= listing.price.toLocaleString("en-IN") %></p>
+              <small class="text-muted"><%= listing.location %>, <%= listing.country %></small>
+            </div>
+          </div>
+        </a>
+      <% } %>
+    </div>
+    <div class="text-center mt-4">
+      <a href="/listings" class="btn btn-primary btn-lg">View All Listings</a>
+    </div>
+  </div>
+</section>
