@@ -101,14 +101,15 @@ body{
 }
 
 .btn-outline-success {
-    border-color: #fe424d;
-    color: #fe424d;
+    border-color: #fe424d !important;
+    color: #fe424d !important;
     transition: all 0.3s ease;
 }
 
 .btn-outline-success:hover {
-    background-color: #fe424d;
-    border-color: #fe424d;
+    background-color: #fe424d !important;
+    border-color: #fe424d !important;
+    color: white !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 15px rgba(254, 66, 77, 0.3);
 }
@@ -278,13 +279,12 @@ body{
         display: none;
     }
     .btn-search{
-        
-        /* color: white !important; */
-        border-radius: 25px;
+        color: #fe424d !important;
+        /* border-radius: 25px; */
     }
     .btn-search:hover{
         background-color: #fe424d !important;
-        color: white !important;
+        color: #fe424d !important;
         box-shadow: 0px 2px 5px black;
     }
 
