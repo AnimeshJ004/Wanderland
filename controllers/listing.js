@@ -1,5 +1,5 @@
 const listing = require("../models/listing");
-const wrapAsync = require("../util/wrapAsync");
+const wrapAsync = require("../util/wrapAsync.js");
 
 //Index Route Callback
 module.exports.index = async (req,res)=>{
@@ -159,12 +159,12 @@ module.exports.HomeList = wrapAsync(async (req, res) => {
     try {
         const allListings = await listing.find({});
         if (allListings.length === 0) {
-            res.render("listing/home.ejs", { listings: sampleListings });
+            res.render("listing/Home.ejs", { listings: sampleListings });
         } else {
-            res.render("listing/home.ejs", { listings: allListings });
+            res.render("listing/Home.ejs", { listings: allListings });
         }
     } catch (error) {
         // If database error, use sample listings
-        res.render("listing/home.ejs", { listings: sampleListings });
+        res.render("listing/Home.ejs", { listings: sampleListings });
     }
 })
