@@ -1,5 +1,5 @@
 const listing = require("../models/listing");
-const wrapAsync = require("../Utils/WrapAsync");
+const wrapAsync = require("../utils/WrapAsync");
 
 //Index Route Callback
 module.exports.index = async (req,res)=>{

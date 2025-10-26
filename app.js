@@ -7,12 +7,12 @@ const app=express();
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const ExpressError = require("./Utils/ExpressError.js");
+const ExpressError = require("./utils/ExpressError.js");
 
-const listingRoutes = require("./Routes/listing.js");
-const reviewRoutes = require("./Routes/review.js");
-const userRoutes = require("./Routes/user.js");
-const generalRoutes = require("./Routes/general.js");
+const listingRoutes = require("./routes/listing.js");
+const reviewRoutes = require("./routes/review.js");
+const userRoutes = require("./routes/user.js");
+const generalRoutes = require("./routes/general.js");
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
