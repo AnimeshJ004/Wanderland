@@ -1,5 +1,5 @@
 const listing = require("../models/listing");
-const wrapAsync = require("../util/WrapAsync");
+const wrapAsync = require("../util/wrapAsync");
 
 //Index Route Callback
 module.exports.index = async (req,res)=>{
@@ -40,7 +40,6 @@ module.exports.ShowList = wrapAsync(async(req,res)=>{
         req.flash("error", "Listing not found!");
         return res.redirect("/listings");
     }
-    console.log(listingItem);
     res.render("listing/show.ejs",{listing: listingItem});
 })
 
@@ -93,7 +92,6 @@ module.exports.UpdateList = wrapAsync(async (req, res) => {
 module.exports.DeleteList = wrapAsync(async(req,res)=>{
     let {id} = req.params;
     let deletedlisting = await listing.findByIdAndDelete(id);
-    console.log(deletedlisting);
     req.flash("success", "Listing deleted successfully!");
     res.redirect("/listings");
 })

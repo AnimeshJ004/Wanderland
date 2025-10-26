@@ -13,10 +13,10 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
-const intiDB = async ()=>{
+const initDB = async ()=>{
    await Listing.deleteMany({});
   initdata.data =  initdata.data.map((obj)=>({...obj,owner:"68afe9fdeff2bddd9dae8df3"}));
    await Listing.insertMany(initdata.data);
    console.log("Data was Saved");
 }
-intiDB();
+initDB();
