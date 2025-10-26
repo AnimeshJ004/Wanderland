@@ -61,7 +61,9 @@ main().then(() => {
         }
     }
 
-
+    app.get('/', (req, res) => {
+    res.redirect('/home');
+    });
     app.use(session(sessionOption));
     app.use(flash());
 
@@ -77,12 +79,6 @@ main().then(() => {
         res.locals.currentUser = req.user;
         next();
     });
-
-    // app.get("/demouser" , async(req,res)=>{
-    //     const fakeuser = new User({username:"demouser" , email:"student@gmail.com"});
-    //     let registeruser= await User.register(fakeuser , "password"); // register method is added by passportLocalMongoose plugin to register a new user with given password
-    //     res.send(registeruser);
-    // })
 
     const { HomeList } = require("./controllers/listing.js");
 
