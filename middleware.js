@@ -29,6 +29,11 @@ module.exports.isLoggedIn=(req,res,next)=>{
         req.flash("error", "You must be logged in first!");
         return res.redirect("/login");
     }
+    // Check if OTP verification is pending
+    if(req.session.otpPending){
+        req.flash("error", "Please complete OTP verification to access this page.");
+        return res.redirect("/verify-otp");
+    }
     next();
 }
 module.exports.saveredircturl=(req,res,next)=>{

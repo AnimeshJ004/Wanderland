@@ -1,4 +1,5 @@
 const User = require("../models/user.js");
+const WrapAsync = require("../Utils/WrapAsync.js");
 
 //Signup logic
 module.exports.PostUser =async (req, res) => {
@@ -23,10 +24,9 @@ module.exports.PostUser =async (req, res) => {
 //Login logic
 module.exports.LoginUser = async (req, res) => {
     req.flash("success", "Welcome back!");
-    // const redirectUrl = req.session.returnTo || "/listings";
-    // delete req.session.returnTo;
     res.redirect(res.locals.redirectUrl || "/listings");
 }
+
 //Logout logic
 module.exports.LogoutUser = (req, res, next) => {
     req.logout(function(err) {

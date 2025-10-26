@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 
 <div class="row mt-3">
-    <h2 class="col-5 offset-4">Login on WanderLust</h2>
-    <div class="col-4 offset-4" style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h2 class="col-4 offset-4 login-title">Login on WanderLand</h2>
+    <div class="col-4 offset-4 login-container">
         <form action="/login" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
@@ -12,8 +12,8 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary sign-btn">Sign Up</button>
+            <button type="submit" class="btn btn-primary sign-btn">Login</button>
         </form>
     </div>
 </div>
-<p class="col-6 offset-4 mb-3 mt-3">Create a new account<a href="/signup"> Sign Up </a></p>
+<p class="col-4 offset-4 mb-3 mt-3 login-link">Don't have an account? <a href="/signup">Sign Up</a></p>

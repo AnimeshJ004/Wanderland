@@ -12,6 +12,7 @@ const ExpressError = require("./Utils/ExpressError.js");
 const listingRoutes = require("./Routes/listing.js");
 const reviewRoutes = require("./Routes/review.js");
 const userRoutes = require("./Routes/user.js");
+const generalRoutes = require("./Routes/general.js");
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -88,6 +89,7 @@ main().then(() => {
     app.use("/listings", listingRoutes); // all routes in listingRoutes will be prefixed with "/"
     app.use("/listings/:id/reviews", reviewRoutes); // all routes in reviewRoutes will be prefixed with "/"
     app.use("/", userRoutes); // all routes in userRoutes will be prefixed with "/"
+    app.use("/", generalRoutes); // general routes like privacy and terms
 
     // Add route for /home to render Home page
     app.get("/home", HomeList);

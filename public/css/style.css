@@ -130,8 +130,8 @@ body{
 }
 
 .search-input {
-    width: 0;
-    opacity: 0;
+    width: 250px;
+    opacity: 1;
     transition: all 0.3s ease;
     margin-right: 0.5rem;
 }
@@ -149,11 +149,11 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #fe424d !important;
 }
 
 .search-toggle:hover {
-    background-color: rgba(254, 66, 77, 0.1);
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 /* Mobile Responsive */
@@ -175,30 +175,67 @@ body{
 
 /* Footer */
 .f-info-links a{
-     text-decoration:none;
-     color: #222222;
+    text-decoration: none;
+    color: #222222;
+    margin: 0 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 .f-info-links a:hover{
-      text-decoration: underline;
+    color: #fe424d;
+    text-decoration: underline;
 }
 .f-info{
-    height: 8rem;
-    background-color: #ebebeb;
+    height: 10rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     display: flex;
     justify-content: center;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     text-align: center;
-    align-items: space-evenly;
+    align-items: center;
+    padding: 2rem 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #dee2e6;
 }
-.f-info-links ,.f-info-socials , .f-info-brand{
+.f-info-links, .f-info-socials, .f-info-brand{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0.5rem 0;
 }
 .f-info-socials i{
-    font-size: 1.2rem;
-    margin-right: 1rem;
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    transition: all 0.3s ease;
+    color: #222222;
+}
+.f-info-brand{
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+.f-info-extra{
+    text-align: center;
+    padding: 1rem 1rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-top: 1px solid #dee2e6;
+    margin-top: 1rem;
+}
+.f-info-extra p{
+    margin: 0.5rem 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.f-info-extra a{
+    color: #fe424d;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.f-info-extra a:hover{
+    color: #e63946;
+    text-decoration: underline;
 }
 
 /* Cards */
@@ -215,6 +252,7 @@ body{
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
+    height: 100% !important;
     box-shadow: 2px 2px 5px black;
 }
 .card-body{
@@ -244,35 +282,483 @@ body{
 .card-title, .card-text {
       /* color: white; */
       text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+      text-shadow: none;
     }
-/* Show image */
+/* Show Page Styles */
+.show-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+}
 
-.show-img{
-    height: 30vh;
+.show-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(135deg, #fe424d, #e63946);
+    border-radius: 2px;
 }
-.btns-show{
-    display: flex;
-}
-.edit-btn{
-    background-color: #fe424d !important;
-    box-shadow: 2px 2px 5px black;
-}
-.edit-btn-delete{
-    background-color: #222222;
-    box-shadow: 2px 2px 5px black;
-}
-.show-card{
-    padding-left: 0;
-    padding-right: 0;
-}
-.dlt-btn{
-    box-shadow: 2px 2px 5px black;
+
+.show-card {
     border: none !important;
-    font-size: 12px !important;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 2rem;
 }
-.sign-btn{
-    /* background-color: #fe424d !important; */
-    box-shadow: 0px 2px 5px black;
+
+.show-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.show-img {
+    height: 50vh;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.show-card:hover .show-img {
+    transform: scale(1.02);
+}
+
+.show-card-body {
+    padding: 2rem !important;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.show-details {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+}
+
+.show-owner {
+    color:black;
+    font-weight: 600;
+    text-shadow: none;
+}
+
+.show-description {
+    color: black;
+    /* font-weight: bold; */
+    text-shadow: none;
+}
+
+.show-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #007bff;
+    display: block;
+    margin: 1rem 0 0.5rem;
+    text-shadow: none;
+}
+
+.show-location {
+    font-size: 1rem;
+    color: black;
+    font-style: italic;
+}
+
+.btns-show {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.edit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3, #004085) !important;
+}
+
+.edit-btn-delete {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.edit-btn-delete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    background: linear-gradient(135deg, #c82333, #a02622) !important;
+}
+
+/* Review Section Styles */
+.review-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(135deg, #fe424d, #e63946);
+    margin: 3rem 0;
+}
+
+.review-title, .reviews-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.review-form {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
+}
+
+.review-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.review-textarea {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    resize: vertical;
+}
+
+.review-textarea:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.25);
+}
+
+.review-submit-btn {
+    background: linear-gradient(135deg, #28a745, #218838) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.review-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    background: linear-gradient(135deg, #218838, #1e7e34) !important;
+}
+
+.reviews-container {
+    margin-top: 2rem;
+}
+
+.review-card {
+    border: none !important;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    overflow: hidden;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.review-card-body {
+    padding: 1.5rem !important;
+}
+
+.review-author {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fe424d;
+    margin-bottom: 0.5rem;
+}
+
+.review-rating {
+    margin-bottom: 1rem;
+}
+
+.review-comment {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.review-delete-form {
+    text-align: right;
+}
+
+.dlt-btn {
+    border: none !important;
+    font-size: 0.9rem !important;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dlt-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* Responsive Design for Show Page */
+@media (max-width: 768px) {
+    .show-title {
+        font-size: 2rem;
+    }
+
+    .show-img {
+        height: 40vh;
+    }
+
+    .show-card-body {
+        padding: 1.5rem !important;
+    }
+
+    .show-price {
+        font-size: 1.3rem;
+    }
+
+    .btns-show {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .edit-btn, .edit-btn-delete {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .review-form {
+        padding: 1.5rem;
+    }
+
+    .review-card {
+        margin: 0.5rem;
+    }
+
+    .reviews-container .col-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+/* Signup Form Styles */
+.signup-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin-top: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.signup-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.signup-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #fe424d, #e63946);
+    border-radius: 2px;
+}
+
+.signup-form .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.signup-form .form-control {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.signup-form .form-control:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.25);
+    transform: translateY(-2px);
+}
+
+.signup-form .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.9rem;
+}
+
+.signup-form .valid-feedback {
+    color: #28a745;
+    font-size: 0.9rem;
+}
+
+.sign-btn {
+    background: linear-gradient(135deg, #fe424d, #e63946) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(254, 66, 77, 0.3);
+    color: white !important;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.sign-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(254, 66, 77, 0.4);
+    background: linear-gradient(135deg, #e63946, #d32f3f) !important;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+.signup-link a {
+    color: #fe424d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #e63946;
+    text-decoration: underline;
+}
+
+/* Login Form Styles */
+.login-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin-top: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.login-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #fe424d, #e63946);
+    border-radius: 2px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+.login-link a {
+    color: #fe424d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #e63946;
+    text-decoration: underline;
+}
+
+/* Responsive Design for Signup */
+@media (max-width: 768px) {
+    .signup-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .signup-title {
+        font-size: 1.8rem;
+    }
+
+    .sign-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive Design for Login */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .login-title {
+        font-size: 1.8rem;
+    }
+
+    .sign-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
 }
 
 /* Navbar Filter */
@@ -538,6 +1024,171 @@ body{
     }
 }
 
+/* Island Destinations Section */
+.islands-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.island-item {
+    margin-bottom: 2rem;
+}
+
+.island-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.island-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.island-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.island-card:hover .island-img {
+    transform: scale(1.05);
+}
+
+.island-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.island-card:hover .island-overlay {
+    transform: translateY(0);
+}
+
+.island-overlay h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.island-overlay p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* New Listing Form Styles */
+.new-listing-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin-top: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.new-listing-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.new-listing-container h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.new-listing-container h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #fe424d, #e63946);
+    border-radius: 2px;
+}
+
+.new-listing-form .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.new-listing-form .form-control {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.new-listing-form .form-control:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.25);
+    transform: translateY(-2px);
+}
+
+.new-listing-form .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.9rem;
+}
+
+.new-listing-form .valid-feedback {
+    color: #28a745;
+    font-size: 0.9rem;
+}
+
+.new-listing-form .btn {
+    background: linear-gradient(135deg, #fe424d, #e63946) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(254, 66, 77, 0.3);
+    color: white !important;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.new-listing-form .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(254, 66, 77, 0.4);
+    background: linear-gradient(135deg, #e63946, #d32f3f) !important;
+}
+
+/* Responsive Design for New Listing Form */
+@media (max-width: 768px) {
+    .new-listing-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .new-listing-container h3 {
+        font-size: 1.8rem;
+    }
+
+    .new-listing-form .btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero-title {
@@ -559,5 +1210,28 @@ body{
 
     .feature-item {
         margin-bottom: 1.5rem;
+    }
+
+    .island-overlay {
+        padding: 1.5rem 1rem 1rem;
+    }
+
+    .island-overlay h4 {
+        font-size: 1.25rem;
+    }
+
+    /* Footer responsive adjustments */
+    .f-info {
+        height: 8rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .f-info-extra {
+        padding: 0.75rem 1rem 1.5rem;
+    }
+
+    .f-info-extra p {
+        font-size: 0.85rem;
+        margin: 0.4rem 0;
     }
 }

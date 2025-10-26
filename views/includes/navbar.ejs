@@ -2,7 +2,7 @@
   <div class="container-fluid px-4">
     <a class="navbar-brand d-flex align-items-center" href="/home">
       <i class="fa-solid fa-compass fa-2x me-2" style="color: #fe424d;"></i>
-      <span class="fw-bold fs-4" style="color: #222222;">WanderLust</span>
+      <span class="fw-bold fs-4" style="color: #222222;">WanderLand</span>
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,12 +17,12 @@
         </a>
       </div>
       <div class="navbar-nav ms-auto d-flex align-items-center">
-        <div class="search-container me-3">
-          <input class="form-control search-input border-0 rounded-pill ps-3" type="search" placeholder="Search destinations..." aria-label="Search" style="border-color: #dee2e6; background-color: #f8f9fa; display: none;">
-          <button class="btn search-toggle border-0 rounded-pill px-3" type="button" style="color: #fe424d;">
+        <form class="search-container me-3" action="/listings" method="GET">
+          <input class="form-control search-input border-0 rounded-pill ps-3" type="search" name="search" placeholder="Search destinations..." aria-label="Search" style="border-color: #dee2e6; background-color: #f8f9fa;">
+          <button class="btn search-toggle border-0 rounded-pill px-3" type="submit" style="color: #fe424d;">
             <i class="fa-solid fa-search"></i>
           </button>
-        </div>
+        </form>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle fw-semibold px-3 py-2 rounded-pill" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #222222; transition: all 0.3s ease;">
             <i class="fa-solid fa-user me-1"></i>

@@ -19,9 +19,10 @@ router.route("/login")
 .get((req, res) => {
     res.render("users/login.ejs");
 })
-.post(saveredircturl ,
-    passport.authenticate("local",{failureRedirect:"login" , failureFlash: true}) ,
-    WrapAsync(LoginUser));
+.post(saveredircturl, passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: true
+}), LoginUser);
 
 //Logout logic
 router.get("/logout", LogoutUser);

@@ -2,7 +2,7 @@
 <div class="hero-section">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 class="hero-title">Welcome to WanderLust</h1>
+    <h1 class="hero-title">Welcome to WanderLand</h1>
     <p class="hero-subtitle">Discover amazing destinations and create unforgettable memories</p>
     <div class="hero-buttons">
       <a href="/listings" class="btn btn-primary btn-lg hero-btn">Explore Listings</a>
@@ -13,7 +13,7 @@
 
 <section class="features-section">
   <div class="container">
-    <h2 class="section-title">Why Choose WanderLust?</h2>
+    <h2 class="section-title">Why Choose WanderLand?</h2>
     <div class="row">
       <div class="col-md-4 feature-item">
         <i class="fas fa-map-marked-alt feature-icon"></i>
@@ -34,27 +34,66 @@
   </div>
 </section>
 
-<section class="listings-preview-section">
+<section class="islands-section">
   <div class="container">
-    <h2 class="section-title">Featured Listings</h2>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-      <% for (let i = 0; i < Math.min(listings.length, 6); i++) { %>
-        <% let listing = listings[i]; %>
-        <a href="/listings/<%= listing._id %>" class="listing-link">
-          <div class="card col listing-card">
-            <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>" style="height: 15rem; object-fit: cover; object-position: center;">
-            <div class="card-img-overlay"></div>
-            <div class="card-body">
-              <b><h6 class="card-title"><%= listing.title %></h6></b>
-              <p class="card-text"> &#8377; <%= listing.price.toLocaleString("en-IN") %></p>
-              <small class="text-muted"><%= listing.location %>, <%= listing.country %></small>
-            </div>
+    <h2 class="section-title">Island Destinations</h2>
+    <div class="row">
+      <div class="col-md-4 island-item">
+        <div class="island-card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Bora Bora" class="island-img">
+          <div class="island-overlay">
+            <h4>Bora Bora</h4>
+            <p>Overwater bungalows in crystal-clear lagoons</p>
           </div>
-        </a>
-      <% } %>
-    </div>
-    <div class="text-center mt-4">
-      <a href="/listings" class="btn btn-primary btn-lg">View All Listings</a>
+        </div>
+      </div>
+      <div class="col-md-4 island-item">
+        <div class="island-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="Maldives" class="island-img">
+          <div class="island-overlay">
+            <h4>Maldives</h4>
+            <p>Privat e resorts on white-sand beaches</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 island-item">
+        <div class="island-card">
+          <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=400&h=300&fit=crop" alt="Santorini" class="island-img">
+          <div class="island-overlay">
+            <h4>Santorini</h4>
+            <p>Cliffside views and stunning sunsets</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 island-item">
+        <div class="island-card">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop" alt="Maui" class="island-img">
+          <div class="island-overlay">
+            <h4>Maui</h4>
+            <p>Haleakalā sunrise and lush valleys</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 island-item">
+        <div class="island-card">
+          <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop" alt="Palau" class="island-img">
+          <div class="island-overlay">
+            <h4>Palau</h4>
+            <p>Rock Islands and pristine marine life</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 island-item">
+        <div class="island-card">
+          <img src="https://images.unsplash.com/photo-1617362985992-d0b6814cacef?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=984" alt="Seychelles" class="island-img">
+          <div class="island-overlay">
+            <h4>Seychelles</h4>
+            <p>Granite boulders and turquoise waters</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+

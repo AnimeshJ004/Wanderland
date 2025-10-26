@@ -1,17 +1,29 @@
 const listing = require("../models/listing");
 const wrapAsync = require("../Utils/WrapAsync");
-const sampleListings = require("../Utils/sampleListings");
 
 //Index Route Callback
 module.exports.index = async (req,res)=>{
-   const alllisting = await listing.find({});
+   const { search } = req.query;
+   let query = {};
+
+   if (search) {
+       query = {
+           $or: [
+               { title: { $regex: search, $options: 'i' } },
+               { description: { $regex: search, $options: 'i' } },
+               { location: { $regex: search, $options: 'i' } },
+               { country: { $regex: search, $options: 'i' } }
+           ]
+       };
+   }
+
+   const alllisting = await listing.find(query);
    if (alllisting.length === 0) {
-       res.render("listing/index.ejs" , { listings: sampleListings });
+       res.render("listing/index.ejs" , { listings: [] });
    } else {
        res.render("listing/index.ejs" , { listings: alllisting });
    }
 }
-
 //New Route Callback
 module.exports.NewList = (req,res)=>{
     res.render("listing/new.ejs")

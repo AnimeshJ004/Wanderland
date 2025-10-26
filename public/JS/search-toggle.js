@@ -6,13 +6,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (searchToggle && searchContainer) {
     searchToggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      searchContainer.classList.toggle('active');
-
-      if (searchContainer.classList.contains('active')) {
-        searchInput.focus();
+      if (this.type === 'submit') {
+        if (!searchInput.value.trim()) {
+          e.preventDefault();
+          searchInput.focus();
+          return;
+        }
+        // Allow form submission if input has value
       } else {
-        searchInput.blur();
+        e.preventDefault();
+        searchContainer.classList.toggle('active');
+
+        if (searchContainer.classList.contains('active')) {
+          searchInput.focus();
+        } else {
+          searchInput.blur();
+        }
       }
     });
 
