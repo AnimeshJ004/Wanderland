@@ -161,6 +161,7 @@ body{
     .navbar-nav {
         text-align: center;
         margin-top: 1rem;
+        background-color: white !important;
     }
 
     .navbar-nav .nav-link {
