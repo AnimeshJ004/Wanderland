@@ -1,6 +1,6 @@
 const Listing = require("./models/listing");
 const ExpressError = require("./util/ExpressError.js");
-const { listingSchema , reviewSchema } = require("./Schema.js");
+const { listingSchema , reviewSchema } = require("./schema.js");
 const Review = require("./models/review");
 
 module.exports.validatelisting = (req,res,next)=>{
