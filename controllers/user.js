@@ -1,5 +1,5 @@
 const User = require("../models/user.js");
-const WrapAsync = require("../utils/WrapAsync.js");
+const WrapAsync = require("../util/WrapAsync.js");
 
 //Signup logic
 module.exports.PostUser =async (req, res) => {
