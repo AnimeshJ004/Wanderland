@@ -7,7 +7,7 @@ const { index , NewList , ShowList , CreateList , EditList ,
          UpdateList , DeleteList} = require("../controllers/listing.js");
 
 const multer = require('multer');
-const { storage } = require("../CloudConfig.js");
+const { storage } = require("../Cloudconfig.js");
 const upload = multer({storage}); // Set the destination folder for uploads
 
 //Index Route
