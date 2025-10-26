@@ -9,10 +9,10 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./util/ExpressError.js");
 
-const listingRoutes = require("./routes/listing.js");
-const reviewRoutes = require("./routes/review.js");
-const userRoutes = require("./routes/user.js");
-const generalRoutes = require("./routes/general.js");
+const listingRoutes = require("./route/listing.js");
+const reviewRoutes = require("./route/review.js");
+const userRoutes = require("./route/user.js");
+const generalRoutes = require("./route/general.js");
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
