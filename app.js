@@ -7,7 +7,7 @@ const app=express();
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const ExpressError = require("../util/expressError.js");
+const ExpressError = require("./util/expressError.js");
 
 const listingRoutes = require("./route/listing.js");
 const reviewRoutes = require("./route/review.js");
