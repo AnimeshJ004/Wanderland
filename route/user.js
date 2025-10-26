@@ -10,14 +10,14 @@ const { PostUser, LoginUser, LogoutUser } = require("../controllers/user.js");
 //Signup form  & Signup logic
 router.route("/signup")
 .get((req, res) => {
-    res.render("user/signup");
+    res.render("users/signup");
 })
 .post(wrapAsync(PostUser));
 
 //Login form & Login logic
 router.route("/login")
 .get((req, res) => {
-    res.render("user/login");
+    res.render("users/login");
 })
 .post(saveredircturl, passport.authenticate("local", {
     failureRedirect: "/login",
