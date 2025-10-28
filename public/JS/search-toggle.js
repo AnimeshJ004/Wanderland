@@ -1,27 +1,15 @@
 // Search toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
-  const searchContainer = document.querySelector('.search-container');
-  const searchToggle = document.querySelector('.search-toggle');
   const searchInput = document.querySelector('.search-input');
+  const searchToggle = document.querySelector('.search-toggle');
+  const searchContainer = document.querySelector('.search-container');
 
-  if (searchToggle && searchContainer) {
+  if (searchToggle && searchInput && searchContainer) {
     searchToggle.addEventListener('click', function(e) {
-      if (this.type === 'submit') {
-        if (!searchInput.value.trim()) {
-          e.preventDefault();
-          searchInput.focus();
-          return;
-        }
-        // Allow form submission if input has value
-      } else {
-        e.preventDefault();
-        searchContainer.classList.toggle('active');
-
-        if (searchContainer.classList.contains('active')) {
-          searchInput.focus();
-        } else {
-          searchInput.blur();
-        }
+      e.preventDefault();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        searchInput.focus();
       }
     });
 
@@ -32,10 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Close search on escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        searchContainer.classList.remove('active');
+    // Submit form when Enter is pressed in search input
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        if (searchInput.value.trim()) {
+          searchInput.closest('form').submit();
+        } else {
+          e.preventDefault();
+          searchInput.focus();
+        }
       }
     });
   }

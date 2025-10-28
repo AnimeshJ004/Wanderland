@@ -4,9 +4,6 @@
       <i class="fa-solid fa-compass fa-2x me-2" style="color: #fe424d;"></i>
       <span class="fw-bold fs-4" style="color: #222222;">WanderLand</span>
     </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav me-auto">
         <a class="nav-link fw-semibold px-3 py-2 mx-1 rounded-pill" href="/listings" style="color: #222222; transition: all 0.3s ease;">
@@ -15,16 +12,8 @@
         <a class="nav-link fw-semibold px-3 py-2 mx-1 rounded-pill" href="/listings/new" style="color: #222222; transition: all 0.3s ease;">
           <i class="fa-solid fa-plus me-1"></i>Add Listing
         </a>
-      </div>
-      <div class="navbar-nav ms-auto d-flex align-items-center">
-        <form class="search-container me-3" action="/listings" method="GET">
-          <input class="form-control search-input border-0 rounded-pill ps-3" type="search" name="search" placeholder="Search destinations..." aria-label="Search" style="border-color: #dee2e6; background-color: #f8f9fa;">
-          <button class="btn search-toggle border-0 rounded-pill px-3" type="submit" style="color: #fe424d;">
-            <i class="fa-solid fa-search"></i>
-          </button>
-        </form>
         <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle fw-semibold px-3 py-2 rounded-pill" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #222222; transition: all 0.3s ease;">
+          <a class="nav-link dropdown-toggle fw-semibold px-3 py-2 mx-1 rounded-pill" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #222222; transition: all 0.3s ease;">
             <i class="fa-solid fa-user me-1"></i>
             <% if(currentUser) { %>
               <%= currentUser.username %>
@@ -32,7 +21,7 @@
               Account
             <% } %>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2" aria-labelledby="userDropdown">
+          <ul class="dropdown-menu shadow border-0 rounded-3 mt-2" aria-labelledby="userDropdown">
             <% if(!currentUser) { %>
               <li><a class="dropdown-item py-2 px-3" href="/signup"><i class="fa-solid fa-user-plus me-2"></i>Sign Up</a></li>
               <li><a class="dropdown-item py-2 px-3" href="/login"><i class="fa-solid fa-sign-in-alt me-2"></i>Login</a></li>
@@ -43,5 +32,82 @@
         </div>
       </div>
     </div>
+    <form class="search-container d-flex align-items-center ms-3 d-none d-lg-flex" action="/listings" method="GET">
+      <input class="form-control search-input border-0 rounded-pill ps-3" type="search" name="search" placeholder="Search destinations..." aria-label="Search" style="border-color: #dee2e6; background-color: #f8f9fa;">
+      <button class="btn search-toggle border-0 rounded-pill px-3 ms-2" type="button" style="color: #fe424d;">
+        <i class="fa-solid fa-search"></i>
+      </button>
+    </form>
+
+    <div class="dropdown d-lg-none">
+      <button class="btn border-0 ms-1" type="button" id="searchDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="color: #fe424d;">
+        <i class="fa-solid fa-search fa-lg"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-center dropdown-menu-end shadow border-0 rounded-1 mt-4" aria-labelledby="searchDropdown">
+        <li>
+          <form class="d-flex align-items-center px-2 py-1" action="/listings" method="GET">
+            <input class="form-control form-control-sm border-0 rounded-pill ps-2 me-2" type="search" name="search" placeholder="Search destinations..." aria-label="Search" style="background-color: #f8f9fa; width: 200px;">
+            <button class="btn btn-sm border-0 rounded-pill px-1" type="submit" style="color: #fe424d;">
+              <i class="fa-solid fa-search"></i>
+            </button>
+          </form>
+        </li>
+      </ul>
+    </div>
+
+    <button class="navbar-toggler border-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
 </nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchContainer = document.querySelector('.search-container');
+    const searchToggle = document.querySelector('.search-toggle');
+    const searchInput = document.querySelector('.search-input');
+
+    if (searchToggle && searchInput && searchContainer) {
+        // Submit search form on search button click only if input has value
+        searchToggle.addEventListener('click', function() {
+            if (searchInput.value.trim() !== '') {
+                searchContainer.submit();
+            }
+        });
+
+        // Submit form when Enter is pressed in search input only if input has value
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (searchInput.value.trim() !== '') {
+                    searchContainer.submit();
+                }
+            }
+        });
+    }
+
+    // Handle mobile search dropdown
+    const mobileSearchForm = document.querySelector('#searchDropdown form');
+    const mobileSearchInput = mobileSearchForm ? mobileSearchForm.querySelector('input[name="search"]') : null;
+    const mobileSearchButton = mobileSearchForm ? mobileSearchForm.querySelector('button') : null;
+
+    if (mobileSearchButton && mobileSearchInput) {
+        mobileSearchButton.addEventListener('click', function(e) {
+            if (mobileSearchInput.value.trim() === '') {
+                e.preventDefault();
+            }
+        });
+
+        mobileSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (mobileSearchInput.value.trim() !== '') {
+                    mobileSearchForm.submit();
+                }
+            }
+        });
+    }
+});
+</script>
+
+

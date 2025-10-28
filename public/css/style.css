@@ -134,7 +134,12 @@ body{
     opacity: 1;
     transition: all 0.3s ease;
     margin-right: 0.5rem;
-}
+    width: 0;
+    opacity: 1;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+ }
 
 .search-container.active .search-input {
     width: 250px;
@@ -161,6 +166,7 @@ body{
     .navbar-nav {
         text-align: center;
         margin-top: 1rem;
+        background-color: white !important;
     }
 
     .navbar-nav .nav-link {
@@ -1223,7 +1229,7 @@ body{
     /* Footer responsive adjustments */
     .f-info {
         height: 8rem;
-        padding: 1.5rem 1rem;
+        padding: 0.7rem 0.8rem;
     }
 
     .f-info-extra {
@@ -1235,3 +1241,80 @@ body{
         margin: 0.4rem 0;
     }
 }
+.dropdown-menu-center {
+    left: 30% !important;
+    transform: translateX(-70%) !important;
+    right: auto !important;
+}
+@media (max-width: 991.98px) {
+    .navbar {
+        background-color: white !important;
+    }
+    .search-container {
+        order: 1;
+        margin-left: 0 !important;
+        margin-right: auto;
+    }
+    .navbar-nav.ms-auto {
+        order: 2;
+    }
+    .navbar-toggler {
+        order: 3;
+    }
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border-top: 1px solid #dee2e6;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .search-container .search-input {
+        display: none !important;
+    }
+}
+@media (min-width: 992px) {
+    .search-container .search-input {
+        width: 250px;
+        opacity: 1;
+    }
+
+    .search-container.hidden {
+        display: none !important;
+    }
+}
+/* Responsive Design for New Listing Form */
+@media (max-width: 768px) {
+    .new-listing-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    .new-listing-container h3 {
+        font-size: 1.8rem;
+    }
+    .new-listing-form .btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive Design for Edit Listing Form */
+@media (max-width: 768px) {
+    .card-body.p-4 {
+        padding: 1.5rem !important;
+    }
+    .form-control-lg {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+    .btn-lg {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+    .card.shadow-lg {
+        margin: 1rem;
+    }
+}
+
