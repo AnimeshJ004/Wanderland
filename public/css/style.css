@@ -87,7 +87,7 @@ body{
 .dropdown-item:hover {
     background-color: rgba(254, 66, 77, 0.1);
     color: #fe424d;
-    transform: translateX(5px);
+    transform: translateX(1px);
 }
 
 .input-group .form-control {
@@ -748,6 +748,23 @@ body{
         padding: 0.6rem 1.5rem;
         font-size: 1rem;
     }
+}
+
+/* Password Toggle Button */
+.toggle-password {
+    border-left: none !important;
+    background-color: #f8f9fa !important;
+    color: #6c757d !important;
+    transition: all 0.3s ease;
+}
+
+.toggle-password:hover {
+    background-color: #e9ecef !important;
+    color: #495057 !important;
+}
+
+.toggle-password:focus {
+    box-shadow: none !important;
 }
 
 /* Responsive Design for Login */
