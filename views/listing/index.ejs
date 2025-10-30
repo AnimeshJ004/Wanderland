@@ -87,8 +87,116 @@
       box-shadow: 0 4px 12px rgba(0,123,255,0.3);
     }
 
-    /* Responsive adjustments */
+    /* Favorite button hover effect */
+    .neumorphic-card:hover .favorite-overlay {
+      opacity: 1;
+    }
+
+    /* Heartbeat animation for click effect */
+    @keyframes heartBeat {
+      0%, 50%, 100% { transform: scale(1); }
+      25%, 75% { transform: scale(1.15); }
+    }
+
+    .favorite-btn.clicked {
+      animation: heartBeat 0.5s ease-in-out !important;
+    }
+
+    /* Enhanced favorite button styling */
+    .favorite-btn {
+      border: none !important;
+      width: 30px !important;
+      height: 30px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+      cursor: pointer !important;
+      border-radius: 50% !important;
+      /* background: rgba(255, 255, 255, 0.9) !important; */
+      /* backdrop-filter: blur(10px) !important; */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .favorite-btn::before {
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)) !important;
+      border-radius: 50% !important;
+      opacity: 0 !important;
+      transition: opacity 0.3s ease !important;
+    }
+
+    .favorite-btn:hover {
+      transform: translateY(2px) !important;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 20px rgba(220, 53, 69, 0.2) !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .favorite-btn:hover::before {
+      opacity: 1 !important;
+    }
+
+    .favorite-btn.favorited {
+      background: linear-gradient(135deg, #ff4757, #ff3838) !important;
+      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4), 0 0 20px rgba(255, 71, 87, 0.2) !important;
+      animation: pulse 2s infinite !important;
+    }
+
+    .favorite-btn.favorited:hover {
+      background: linear-gradient(135deg, #ff3742, #ff2828) !important;  
+      box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6), 0 0 30px rgba(255, 71, 87, 0.4) !important;
+      transform: scale(1.15) translateY(-3px) !important;
+    }
+
+    .favorite-btn.favorited::before {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)) !important;
+    }
+
+    .favorite-btn i {
+      /* transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; */
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.2)) !important;
+      font-size: 1rem !important;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+
+    .favorite-btn:hover i {
+      transform: scale(1.3) !important;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)) !important;
+    }
+
+    .favorite-btn.favorited i {
+      color: white !important;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5)) !important;
+    }
+
+    .favorite-btn.favorited:hover i {
+      transform: scale(1) !important;
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8)) !important;
+    }
+
+    /* Pulse animation for favorited state */
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4), 0 0 20px rgba(255, 71, 87, 0.2);
+      }
+      50% {
+        box-shadow: 0 4px 15px rgba(255, 71, 87, 0.6), 0 0 25px rgba(255, 71, 87, 0.3);
+      }
+    }
+
+    /* Always show favorite button on mobile (no hover needed) */
     @media (max-width: 768px) {
+      .favorite-overlay {
+        opacity: 1 !important;
+      }
       .neumorphic-card {
         margin-bottom: 1.5rem;
       }
@@ -121,6 +229,56 @@
       }
       isTaxesShown = !isTaxesShown;
     });
+
+    // Favorite button AJAX functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const favoriteBtns = document.querySelectorAll('.favorite-btn');
+      favoriteBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const form = btn.closest('.favorite-form');
+          const listingId = btn.getAttribute('data-listing-id');
+          const isFavorited = btn.getAttribute('data-is-favorited') === 'true';
+          const action = isFavorited ? 'remove' : 'add';
+
+          try {
+            const response = await fetch(`/favorites/${listingId}/${action}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+              },
+            });
+
+            if (response.ok) {
+              btn.classList.toggle('favorited');
+              btn.setAttribute('data-is-favorited', !isFavorited);
+              // Update form action
+              const newAction = !isFavorited ? 'remove' : 'add';
+              form.action = `/favorites/${listingId}/${newAction}`;
+              // Update icon color
+              const icon = btn.querySelector('i');
+              icon.classList.remove('text-danger', 'text-muted');
+              if (!isFavorited) {
+                icon.classList.add('text-danger');
+              } else {
+                icon.classList.add('text-muted');
+              }
+              // Add heartbeat animation
+              btn.classList.add('clicked');
+              setTimeout(() => {
+                btn.classList.remove('clicked');
+              }, 500);
+            } else {
+              console.error('Failed to toggle favorite');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        });
+      });
+    });
    </script>
 
    <div class="container mt-4 mb-5">
@@ -141,6 +299,18 @@
              <div class="card neumorphic-card <%= cardStyle %> h-100" style="border: none; border-radius: 16px; overflow: hidden; transition: all 0.4s ease; position: relative;">
                <div class="position-relative" style="height: 250px;">
                  <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                 <div class="favorite-overlay" style="position: absolute; top: 10px; right: 10px; opacity: 1; transition: opacity 0.3s ease;">
+                   <% if(currentUser) { %>
+                     <%
+                       const isFavorited = currentUser.favorites && currentUser.favorites.some(fav => fav.toString() === listing._id.toString());
+                     %>
+                     <form action="/favorites/<%= listing._id %>/<%= isFavorited ? 'remove' : 'add' %>" method="POST" class="favorite-form">
+                       <button type="submit" class="btn btn-sm favorite-btn <%= isFavorited ? 'favorited' : '' %>" data-listing-id="<%= listing._id %>" data-is-favorited="<%= isFavorited %>">
+                         <i class="fas fa-heart <%= isFavorited ? '' : 'text-muted' %>"></i>
+                       </button>
+                     </form>
+                   <% } %>
+                 </div>
                </div>
 
                <div class="card-body" style="padding: 1.8rem; line-height: 1.6;">

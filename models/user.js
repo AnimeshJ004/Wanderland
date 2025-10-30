@@ -3,10 +3,14 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new Schema({
-    email: {   
+    email: {
         type: String,
         required: true,
-    }
+    },
+    favorites: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Listing"
+    }]
 });
 
 userSchema.plugin(passportLocalMongoose); // adds username , hash and salt fields to store the username , the hashed password and the salt value

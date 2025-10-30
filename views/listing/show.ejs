@@ -1,10 +1,91 @@
 <%-layout("/layouts/boilerplate")%>
+<style>
+/* Favorite button hover effect */
+.listing-card:hover .favorite-overlay {
+  opacity: 1;
+}
+
+/* Heartbeat animation for click effect */
+@keyframes heartBeat {
+  0%, 50%, 100% { transform: scale(1); }
+  25%, 75% { transform: scale(1.15); }
+}
+
+.favorite-btn.clicked {
+  animation: heartBeat 0.5s ease-in-out !important;
+}
+
+/* Enhanced favorite button styling for show page */
+.favorite-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 50% !important;
+  width: 55px !important;
+  height: 55px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  cursor: pointer !important;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 0 10px rgba(220, 53, 69, 0.3) !important;
+  background: rgba(255, 255, 255, 1) !important;
+  border-color: rgba(220, 53, 69, 0.5) !important;
+}
+
+.favorite-btn.favorited {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52) !important;
+  border-color: #dc3545 !important;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4) !important;
+}
+
+.favorite-btn.favorited:hover {
+  background: linear-gradient(135deg, #ff5252, #d32f2f) !important;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6), 0 0 15px rgba(255, 82, 82, 0.5) !important;
+}
+
+.favorite-btn i {
+  transition: all 0.3s ease !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+.favorite-btn:hover i {
+  transform: scale(1.2) !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Always show favorite button on mobile (no hover needed) */
+@media (max-width: 768px) {
+  .favorite-overlay {
+    opacity: 1 !important;
+  }
+}
+</style>
    <div class="row mt-3 mb-4">
     <div class="col-10 offset-1">
     
 <h1 class="show-title"><%= listing.title %></h1>
     <div class="card show-card listing-card">
-          <img src="<%= listing.image.url %>" alt="listing_image" class="card-img-top show-img">
+          <div class="position-relative">
+            <img src="<%= listing.image.url %>" alt="listing_image" class="card-img-top show-img">
+            <% if(currentUser) { %>
+              <%
+                const isFavorited = currentUser.favorites && currentUser.favorites.some(fav => fav.toString() === listing._id.toString());
+              %>
+              <div class="card-img-overlay d-flex justify-content-end align-items-start p-3 favorite-overlay" style="top: 10px; right: 10px; opacity: 0; transition: opacity 0.3s ease;">
+                <form action="/favorites/<%= listing._id %>/<%= isFavorited ? 'remove' : 'add' %>" method="POST" class="favorite-form">
+                  <button type="submit" class="btn btn-sm favorite-btn <%= isFavorited ? 'favorited' : '' %>" data-listing-id="<%= listing._id %>" data-is-favorited="<%= isFavorited %>">
+                    <i class="fas fa-heart <%= isFavorited ? 'text-danger' : 'text-muted' %>"></i>
+                  </button>
+                </form>
+              </div>
+            <% } %>
+          </div>
           <div class="card-body show-card-body">
               <p class="card-text show-details">
                 <i class="show-owner"><b>Owned by: <%= listing.owner.username %></b></i>
@@ -72,3 +153,55 @@
         </div>
     </div>
     </div>
+
+    <script>
+    // Favorite button AJAX functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const favoriteBtns = document.querySelectorAll('.favorite-btn');
+      favoriteBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const form = btn.closest('.favorite-form');
+          const listingId = btn.getAttribute('data-listing-id');
+          const isFavorited = btn.getAttribute('data-is-favorited') === 'true';
+          const action = isFavorited ? 'remove' : 'add';
+
+          try {
+            const response = await fetch(`/favorites/${listingId}/${action}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+              },
+            });
+
+            if (response.ok) {
+              btn.classList.toggle('favorited');
+              btn.setAttribute('data-is-favorited', !isFavorited);
+              // Update form action
+              const newAction = !isFavorited ? 'remove' : 'add';
+              form.action = `/favorites/${listingId}/${newAction}`;
+              // Update icon color
+              const icon = btn.querySelector('i');
+              icon.classList.remove('text-danger', 'text-muted');
+              if (!isFavorited) {
+                icon.classList.add('text-danger');
+              } else {
+                icon.classList.add('text-muted');
+              }
+              // Add heartbeat animation
+              btn.classList.add('clicked');
+              setTimeout(() => {
+                btn.classList.remove('clicked');
+              }, 500);
+            } else {
+              console.error('Failed to toggle favorite');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        });
+      });
+    });
+    </script>

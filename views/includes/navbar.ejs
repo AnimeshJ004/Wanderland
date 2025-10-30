@@ -4,7 +4,7 @@
       <i class="fa-solid fa-compass fa-2x me-2" style="color: #fe424d;"></i>
       <span class="fw-bold fs-4" style="color: #222222;">WanderLand</span>
     </a>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse pt-1 pt-sm-0" id="navbarNavAltMarkup">
       <div class="navbar-nav me-auto">
         <a class="nav-link fw-semibold px-3 py-2 mx-1 rounded-pill" href="/listings" style="color: #222222; transition: all 0.3s ease;">
           <i class="fa-solid fa-magnifying-glass me-1"></i>Explore
@@ -12,6 +12,11 @@
         <a class="nav-link fw-semibold px-3 py-2 mx-1 rounded-pill" href="/listings/new" style="color: #222222; transition: all 0.3s ease;">
           <i class="fa-solid fa-plus me-1"></i>Add Listing
         </a>
+        <% if(currentUser) { %>
+          <button class="nav-link fw-semibold px-3 py-2 mx-1 rounded-pill d-lg-none" onclick="window.location.href='/favorites'" style="color: #222222; transition: all 0.3s ease;">
+            <i class="fa-solid fa-heart me-1"></i>Favorites
+          </button>
+        <% } %>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle fw-semibold px-3 py-2 mx-1 rounded-pill" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #222222; transition: all 0.3s ease;">
             <i class="fa-solid fa-user me-1"></i>
@@ -26,12 +31,16 @@
               <li><a class="dropdown-item py-2 px-3" href="/signup"><i class="fa-solid fa-user-plus me-2"></i>Sign Up</a></li>
               <li><a class="dropdown-item py-2 px-3" href="/login"><i class="fa-solid fa-sign-in-alt me-2"></i>Login</a></li>
             <% } else { %>
+              <li><button class="dropdown-item py-2 px-3" onclick="window.location.href='/favorites'"><i class="fa-solid fa-heart me-2"></i>Favorites</button></li>
               <li><a class="dropdown-item py-2 px-3" href="/logout"><i class="fa-solid fa-sign-out-alt me-2"></i>Logout</a></li>
             <% } %>
           </ul>
         </div>
       </div>
     </div>
+    <a class="nav-link fw-semibold px-3 py-2 mx-1 rounded-pill d-none d-lg-inline-block" href="/favorites" style="color: #222222; transition: all 0.3s ease;">
+      <i class="fa-solid fa-heart me-1"></i>
+    </a>
     <form class="search-container d-flex align-items-center ms-3 d-none d-lg-flex" action="/listings" method="GET">
       <input class="form-control search-input border-0 rounded-pill ps-3" type="search" name="search" placeholder="Search destinations..." aria-label="Search" style="border-color: #dee2e6; background-color: #f8f9fa;">
       <button class="btn search-toggle border-0 rounded-pill px-3 ms-1" type="button" style="color: #fe424d;">
