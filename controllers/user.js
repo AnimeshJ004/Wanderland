@@ -5,6 +5,12 @@ const wrapAsync = require("../util/wrapAsync.js");
 module.exports.PostUser =async (req, res) => {
     try{
     let {username, email, password} = req.body;
+    // Check if email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+        req.flash("error", "Email is already registered");
+        return res.redirect("/signup");
+    }
     const newUser =  new User({username, email});
    const registered = await User.register(newUser, password) // register method is added by passportLocalMongoose plugin to register a new user with given password
    req.login(registered , (err) => {  // login method is added by passport
