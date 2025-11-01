@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 
 // Debug logging for email config (only in development)
 if (process.env.NODE_ENV !== 'production') {
@@ -74,6 +75,39 @@ const createTransporter = () => {
 };
 
 const sendOTP = async (email, otp) => {
+    // Try SendGrid first if API key is available
+    if (process.env.SENDGRID_API_KEY) {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+        const msg = {
+            to: email,
+            from: process.env.FROM_EMAIL || 'noreply@wandreland.com',
+            subject: 'Your OTP for Email Verification - WanderLand',
+            text: `Your OTP for WanderLand account verification is: ${otp}. It expires in 10 minutes.`,
+            html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #fe424d;">Welcome to WanderLand!</h2>
+                <p>Your OTP for email verification is:</p>
+                <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-radius: 5px; margin: 20px 0;">
+                    <h1 style="color: #fe424d; font-size: 32px; margin: 0;">${otp}</h1>
+                </div>
+                <p>This OTP will expire in 10 minutes.</p>
+                <p>If you didn't request this, please ignore this email.</p>
+                <hr style="border: none; border-top: 1px solid #eee;">
+                <p style="color: #666; font-size: 12px;">This is an automated message from WanderLand. Please do not reply to this email.</p>
+            </div>`,
+        };
+
+        try {
+            await sgMail.send(msg);
+            console.log(`OTP email sent successfully to ${email} via SendGrid`);
+            return { success: true };
+        } catch (sendGridError) {
+            console.error('SendGrid failed:', sendGridError.message);
+            // Fall back to nodemailer
+        }
+    }
+
+    // Fallback to nodemailer
     let transporter = createTransporter();
 
     // In development, if Gmail fails, automatically use Ethereal Email
@@ -121,7 +155,7 @@ const sendOTP = async (email, otp) => {
 
     try {
         const info = await transporter.sendMail(mailOptions);
-        console.log(`OTP email sent successfully to ${email}`);
+        console.log(`OTP email sent successfully to ${email} via nodemailer`);
 
         // In development with Ethereal, show preview URL
         if (process.env.NODE_ENV !== 'production' && info.messageId) {

@@ -42,24 +42,7 @@ module.exports.PostUser =async (req, res) => {
    } catch (emailError) {
        console.error('Email sending failed:', emailError);
 
-       // In development, if email fails, create account and log OTP for testing
-       if (process.env.NODE_ENV !== 'production') {
-           console.log(`\n=== DEVELOPMENT MODE: EMAIL FAILED ===`);
-           console.log(`Creating account for testing despite email failure`);
-           console.log(`Email: ${email}`);
-           console.log(`OTP: ${otp}`);
-           console.log(`Use this OTP to verify your account`);
-           console.log(`=====================================\n`);
-
-           // Create user even if email fails in development
-           const newUser = new User({username, email, otp, otpExpires: new Date(Date.now() + 10 * 60 * 1000)});
-           await User.register(newUser, password);
-
-           req.flash("success", "Account created. Check console for OTP to verify.");
-           return res.redirect("/verify-otp");
-       }
-
-       // In production, never create account if email fails
+       // In production (including Render), never create account if email fails
        req.flash("error", "Unable to send verification email. Please check your email address and try again.");
        res.redirect("/signup");
    }

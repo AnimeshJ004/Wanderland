@@ -33,6 +33,9 @@ module.exports.resendOTP = async (req, res) => {
             console.log(`==================\n`);
         }
 
+        // Store email in session for OTP verification
+        req.session.pendingVerificationEmail = user.email;
+
         req.flash("success", "OTP resent to your email");
         res.redirect("/verify-otp");
     } catch (error) {
