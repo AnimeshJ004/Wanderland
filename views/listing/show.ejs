@@ -88,7 +88,7 @@
           </div>
           <div class="card-body show-card-body">
               <p class="card-text show-details">
-                <i class="show-owner"><b>Owned by: <%= listing.owner.username %></b></i>
+                <i class="show-owner"><b>Owned by: <%= listing.owner ? listing.owner.username : 'Unknown' %></b></i>
                 <br><br>
                 <span class="show-description"><%= listing.description %></span><br>
                 <span class="show-price">&#8377; <%= listing.price.toLocaleString("en-IN") %></span><br>

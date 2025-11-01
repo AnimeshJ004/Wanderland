@@ -1,0 +1,17 @@
+<%- layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <h2 class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1 signup-title">Verify Your Email</h2>
+    <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1 signup-container">
+        <form action="/verify-otp" method="POST" class="needs-validation signup-form" novalidate>
+            <div class="mb-3">
+                <label for="otp" class="form-label">Enter OTP</label>
+                <input type="text" class="form-control" id="otp" name="otp" required maxlength="6" pattern="[0-9]{6}">
+                <div class="invalid-feedback">Please enter a valid 6-digit OTP.</div>
+                <div class="valid-feedback">OTP looks good!</div>
+            </div>
+            <button type="submit" class="btn btn-primary sign-btn">Verify</button>
+        </form>
+    </div>
+</div>
+<p class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1 mb-3 mt-3 signup-link">Didn't receive OTP? <a href="/resend-otp">Resend OTP</a></p>

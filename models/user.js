@@ -8,6 +8,16 @@ const userSchema = new Schema({
         required: true,
         unique: true,
     },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
+    otp: {
+        type: String,
+    },
+    otpExpires: {
+        type: Date,
+    },
     favorites: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Listing"

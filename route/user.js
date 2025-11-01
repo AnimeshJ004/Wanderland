@@ -5,6 +5,7 @@ const wrapAsync = require("../util/wrapAsync.js");
 const passport = require("passport");
 const { saveredircturl } = require("../middleware.js");
 const { PostUser, LoginUser, LogoutUser } = require("../controllers/user.js");
+const { resendOTP, verifyOTP } = require("../controllers/otp.js");
 
 
 //Signup form  & Signup logic
@@ -23,6 +24,16 @@ router.route("/login")
     failureRedirect: "/login",
     failureFlash: true
 }), LoginUser);
+
+//OTP verification routes
+router.route("/verify-otp")
+.get((req, res) => {
+    res.render("users/verify-otp");
+})
+.post(wrapAsync(verifyOTP));
+
+//Resend OTP
+router.get("/resend-otp", wrapAsync(resendOTP));
 
 //Logout logic
 router.get("/logout", LogoutUser);
